@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 
 // configure handlebars
@@ -8,6 +9,12 @@ app.set('view engine', 'handlebars');
 
 // make public folder visible -- (a middleware)
 app.use(express.static('public'));
+
+// parse appliction
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application / json
+app.use(bodyParser.json());
 
 // getting our routes
 app.get('/', function(req, res){

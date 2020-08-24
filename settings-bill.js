@@ -1,100 +1,92 @@
-function BillWithSettings() {
-    var theCallCost = 0;
-    var theSmsCost = 0;
-    var theWarningLevel = 0;
-    var theCriticalLevel = 0;
+module.exports = function SettingsBill(){
+    let smsCost;
+    let callCost;
+    let warningLevel;
+    let criticalLevel;
 
-    var callCostTotal = 0;
-    var smsCostTotal = 0;
+    let actionList = [];
 
-    // call costs functions
-    function setCallCost(callCost) {
-        theCallCost = callCost;
+    function setSettings(settings){
+        smsCost = Number(settings.smsCost);
+        callCost = Number(settings.callCost);
+        warningLevel = settings.warningLevel;
+        criticalLevel = settings.criticalLevel;
     }
 
-    function getCallCost() {
-        return theCallCost;
-    }
-
-    // sms costs functions
-    function setSmsCost(smsCost) {
-        theSmsCost = smsCost;
-    }
-
-    function getSmsCost() {
-        return theSmsCost;
-    }
-
-    // warning level function
-    function setWarningLevel(warningLevel) {
-        theWarningLevel = warningLevel;
-    }
-
-    function getWarningLevel() {
-        return theWarningLevel;
-    }
-
-    // critical level function
-    function setCriticalLevel(criticalLevel) {
-        theCriticalLevel = criticalLevel;
-    }
-
-    function getCriticalLevel() {
-        return theCriticalLevel;
-    }
-
-    function makeCall() {
-        if (!hasReachedCriticalLevel()) {
-            callCostTotal += theCallCost;
+    function getSettings(){
+        return {
+            smsCost,
+            callCost,
+            warningLevel,
+            criticalLevel
         }
     }
 
-    function getTotalCost() {
-        return callCostTotal + smsCostTotal;
+    function recordAction(action){
+        let cost = 0;
+        if(action === 'sms'){
+            cost = smsCost;
+        }else if (action === 'call') {
+            cost = callCost;
+        }
+
+        actionList.push({
+            type: action,
+            cost, 
+            timeStamp: new Date()
+        });
     }
 
-    function getTotalCallCost() {
-        return callCostTotal;
+    function actions(){
+        return actions;
     }
 
-    function getTotalSmsCost() {
-        return smsCostTotal;
+    function actionsFor(type){
+        return actionList.filter((action) => action.type === type)
     }
 
-    function sendSms() {
-        if (!hasReachedCriticalLevel()) {
-            return smsCostTotal += theSmsCost;
+    function getTotal(type){
+        return actionList.reduce((total, action) => {
+            let val = action.type === type action.cross : 0;
+            return total + val;
+        }, 0);
+    }
+
+    function grandTotal(){
+        return getTotal('sms') + getTotal('call');
+    }
+
+    function totals(){
+        let smsTotal = getTotal('sms');
+        let callTotal = getTotal('call');
+
+        return {
+            smsTotal,
+            callTotal,
+            grandTotal : grandTotal()
         }
     }
 
-    function hasReachedCriticalLevel() {
-        return getTotalCallCost() >= getCriticalLevel()
+    function hasReachedWarningLevel(){
+        const total = grandTotal();
+        const reachedWarningLevel = total >= warningLevel && total < criticalLevel;
+
+        return reachedWarningLevel;
     }
 
-    function totalClassName() {
-        if (hasReachedCriticalLevel()) {
-            return "critical";
-        }
-
-        if (getTotalCallCost() >= getWarningLevel()) {
-            return "warning";
-        }
+    function hasReachedCriticalLevel(){
+        const total = grandTotal();
+        return total >= criticalLevel;
     }
 
     return {
-        setCallCost,
-        getCallCost,
-        setSmsCost,
-        getSmsCost,
-        setWarningLevel,
-        getWarningLevel,
-        setCriticalLevel,
-        getCriticalLevel,
-        makeCall,
-        getTotalCost,
-        getTotalCallCost,
-        getTotalSmsCost,
-        sendSms,
-        totalClassName
+        setSettings,
+        getSettings,
+        recordAction,
+        actions,
+        actionsFor,
+        totals,
+        hasReachedWarningLevel,
+        hasReachedCriticalLevel
     }
 }
