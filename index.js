@@ -6,7 +6,7 @@ const exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-// make public folder visible -- a middleware;
+// make public folder visible -- (a middleware)
 app.use(express.static('public'));
 
 // getting our routes
@@ -14,7 +14,8 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 app.post('/settings', function(req, res){
-
+	console.log(req.body);
+	res.redirect('/');
 })
 app.post('/action', function(req, res){	
 })

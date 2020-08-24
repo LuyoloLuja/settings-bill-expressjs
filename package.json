@@ -1,0 +1,26 @@
+{
+  "name": "settings-bill-expressjs",
+  "version": "1.0.0",
+  "description": "In this document we will explore how to create web applications with [ExpressJS](http://http://expressjs.com/).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuyoloLuja/settings-bill-expressjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuyoloLuja/settings-bill-expressjs/issues"
+  },
+  "homepage": "https://github.com/LuyoloLuja/settings-bill-expressjs#readme",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
