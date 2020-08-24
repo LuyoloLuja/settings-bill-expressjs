@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 
+const SettingsBill = require('./settings-bill');
+const settingsBill = SettingsBill();
+
 // configure handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -18,14 +21,28 @@ app.use(bodyParser.json());
 
 // getting our routes
 app.get('/', function(req, res){
-	res.render('index');
+	res.render('index', {
+		settings: settingsBill.getSettings()
+	});
 });
+
 app.post('/settings', function(req, res){
-	console.log(req.body);
+
+	settingsBill.setSettings({
+		callCost: req.body.callCost,
+		smsCost: req.body.smsCost,
+		warningLevel: req.body.warningLevel,
+		criticalLevel: req.body.criticalLevel
+	});
+
+	// console.log(settingsBill.getSettings());
 	res.redirect('/');
 })
+
 app.post('/action', function(req, res){	
+
 })
+
 app.get('/actions', function(req, res){
 	
 })

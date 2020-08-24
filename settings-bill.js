@@ -47,7 +47,7 @@ module.exports = function SettingsBill(){
 
     function getTotal(type){
         return actionList.reduce((total, action) => {
-            let val = action.type === type action.cross : 0;
+            let val = action.type === type ? action.cross : 0;
             return total + val;
         }, 0);
     }
