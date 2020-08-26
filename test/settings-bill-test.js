@@ -1,3 +1,6 @@
+let assert = require("assert");
+let settingsBill = require("../settings-bill");
+
 describe('The bill with settings function', function(){
     it('Should be able to set the call cost', function(){
         let settingsBill = BillWithSettings();
