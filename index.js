@@ -22,7 +22,8 @@ app.use(bodyParser.json());
 // getting our routes
 app.get('/', function(req, res){
 	res.render('index', {
-		settings: settingsBill.getSettings()
+		settings: settingsBill.getSettings(),
+		totals: settingsBill.totals()
 	});
 });
 
@@ -35,12 +36,18 @@ app.post('/settings', function(req, res){
 		criticalLevel: req.body.criticalLevel
 	});
 
-	// console.log(settingsBill.getSettings());
+	// redirecting to home route
 	res.redirect('/');
 })
 
+	// bill type radio buttons and submit
 app.post('/action', function(req, res){	
 
+	// capture the bill type to add
+	settingsBill.recordAction(req.body.actionType)
+
+	// redirecting to home route
+	res.redirect('/');
 })
 
 app.get('/actions', function(req, res){
