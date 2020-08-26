@@ -1,9 +1,18 @@
-<h1>Actions</h1>
+<div class="row">
+	<h1>Actions</h1>
 
-<table>
-	<th>
-		<td>Type</td>
-		<td>Price</td>
-		<td>When</td>
-	</th>
-</table>
+	<table>
+		<tr>
+			<th>Type</th>
+			<th>Price</th>
+			<th>When</th>
+		</tr>
+		{{#each actions}} 
+		<tr>
+			<td>{{type}}</td>
+			<td>{{cost}}</td>
+			<td>{{timestamp}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</div>

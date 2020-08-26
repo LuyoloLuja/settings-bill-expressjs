@@ -34,12 +34,12 @@ module.exports = function SettingsBill(){
         actionList.push({
             type: action,
             cost, 
-            timeStamp: new Date()
+            timestamp: new Date()
         });
     }
 
     function actions(){
-        return actions;
+        return actionList;
     }
 
     function actionsFor(type){
