@@ -114,6 +114,7 @@ module.exports = function SettingsBill(){
         totals,
         hasReachedWarningLevel,
         hasReachedCriticalLevel,
-        totalColor
+        totalColor,
+        getTotal
     }
 }
