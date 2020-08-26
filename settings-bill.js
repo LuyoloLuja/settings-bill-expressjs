@@ -43,14 +43,27 @@ module.exports = function SettingsBill(){
     }
 
     function actionsFor(type){
-        return actionList.filter((action) => action.type === type)
+        filteredList = [];
+        for (var i = 0; i < actionList.length; i++) {
+            let eachBill = actionList[i];
+
+            if (eachBill.type === type) {
+                filteredList.push(eachBill)
+            }
+        }
+        return filteredList;
     }
 
     function getTotal(type){
-        return actionList.reduce((total, action) => {
-            let val = action.type === type ? action.cross : 0;
-            return total + val;
-        }, 0);
+        total = 0;
+        for(var i = 0; i < actionList.length; i++){
+            let eachBill = actionList[i];
+
+            if (eachBill.type === type) {
+                total += eachBill.cost;
+            }
+        }
+        return total;
     }
 
     function grandTotal(){
