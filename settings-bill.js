@@ -68,7 +68,7 @@ module.exports = function SettingsBill(){
     }
 
     function grandTotal(){
-        return getTotal('sms') + getTotal('call');
+        return getTotal('sms').toFixed(2) + getTotal('call').toFixed(2);
     }
 
     function totals(){
