@@ -54,7 +54,6 @@ app.post('/action', function(req, res){
 })
 
 app.get('/actions', function(req, res){
-	const recordAction = settingsBill.recordAction();
 	const lists = settingsBill.actions();
 
 	for(action of lists){
@@ -69,7 +68,6 @@ app.get('/actions', function(req, res){
 
 app.get('/actions/:actionType', function(req, res){
 	const actionType = req.params.actionType;
-	const momentRecords = settingsBill.recordAction();
 	const lists = settingsBill.actions()
 
 	for(action of lists){
